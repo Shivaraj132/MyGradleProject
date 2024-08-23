@@ -2,24 +2,17 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      java: corretto17  # Specify Java 17
     commands:
-      - echo Installing dependencies...
-      - ./gradlew build
-  pre_build:
-    commands:
-      - echo Pre-build phase...
+      - echo "Installing Gradle..."
+      - gradle --version
   build:
     commands:
-      - echo Build started on `date`
-      - ./gradlew clean build
-  post_build:
-    commands:
-      - echo Build completed on `date`
-      - ls build/libs
-
+      - echo "Building the project..."
+      - gradle build
+      - ls -l build/libs/  # List the contents of the build/libs/ directory
 artifacts:
   files:
     - build/libs/*.jar
-  discard-paths: yes
-  base-directory: build/libs
 
